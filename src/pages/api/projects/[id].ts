@@ -8,6 +8,14 @@ export default async function handler(
   const projectId = parseInt(req.query.id as string);
 
   if (req.method === "PUT") {
+    const { name } = JSON.parse(req.body);
+
+    const result = await prisma.projects.update({
+      where: { id: projectId },
+      data: { name },
+    });
+
+    res.json(result);
   }
 
   if (req.method === "DELETE") {
